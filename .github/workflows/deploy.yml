@@ -1,0 +1,15 @@
+name: Deploy to Cloudflare Pages
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        run: npx wrangler@latest pages deploy . --project-name=reggieblack-com --branch=main
+        env:
+          CLOUDFLARE_ACCOUNT_ID: 0be8e58948075d17dbaae748bfe93b56
+          CLOUDFLARE_API_KEY: ${{ secrets.CF_API_KEY }}
+          CLOUDFLARE_EMAIL: reggieblack@gmail.com
